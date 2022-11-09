@@ -1,3 +1,4 @@
+add_subdirectory(cmsis-core)
 # use OBJECT library to prevent linker drop library while no explict reference to
 add_library(stm32f072b-disco OBJECT)
 target_sources(stm32f072b-disco PRIVATE startup.s)
