@@ -1,6 +1,6 @@
 #include <cstdint>
 #include <cmath>
-
+//#define TEST_GLOBAL_DATA_NOT_LOAD
 void delay(unsigned int t) {
     while (t-- > 0);
 }
@@ -45,10 +45,14 @@ float breathing_brightness(uint32_t t, uint32_t respiratory_period) {
     auto radian = t * 2 * PI / respiratory_period - PI / 2;
     return (std::sin(radian) + 1) / 2;
 }
-
+#if defined(TEST_GLOBAL_DATA_NOT_LOAD)
+int test_data = 2;
+#endif
 int main() {
     light_enable();
-
+#if defined(TEST_GLOBAL_DATA_NOT_LOAD)
+    test_data--;
+#endif
     constexpr uint32_t refresh_rate = 50;
     constexpr auto refresh_period = 1000u / refresh_rate;
     constexpr auto respiratory_rate = 12u;
